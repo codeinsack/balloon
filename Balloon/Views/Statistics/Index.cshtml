@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Balloon.Models.Good>
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2 style="text-align:center; margin-bottom:20px;">Статистика эффективности продаж товаров</h2>
+
+<table class="table">
+    @using (Html.BeginForm("Index", "Statistics", FormMethod.Get))
+    {
+        <tr class="success">
+            <th>
+                @Html.ActionLink("Наименование", "Index", new { SortOrder = ViewBag.GoodName })
+            </th>
+            <th>
+                @Html.ActionLink("Количество просмотров", "Index", new { SortOrder = ViewBag.BrowseCount })
+            </th>
+            <th>
+                @Html.ActionLink("Сколько раз товар был заказан", "Index", new { SortOrder = ViewBag.OrderCount })
+            </th>
+            <th>
+                @Html.ActionLink("Успешность продаваемости товара", "Index", new { SortOrder = ViewBag.SellingSuccess })
+            </th>
+            <th>
+                @Html.DisplayName("Изображение")
+            </th>
+            <th></th>
+        </tr>
+    }
+    
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClickCount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InOrderCount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SellingSuccess) %
+            </td>
+            <td>
+                @if (item.ImageData == null)
+                {
+                    @:Нет изображения
+            }
+                else
+                {
+                    <img width="70" src="@Url.Action("GetImage", "Good", new { item.GoodId })" />
+                }
+            </td>
+        </tr>
+    }
+
+</table>

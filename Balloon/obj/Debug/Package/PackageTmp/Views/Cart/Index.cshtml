@@ -1,0 +1,58 @@
+﻿@model Balloon.Models.CartIndexViewModel
+
+@{
+    ViewBag.Title = "Sports Store: Your Cart";
+}
+
+<link href="~/Content/cart.css?v=@DateTime.Now.Millisecond" rel="stylesheet" />
+
+<h2 style="text-align:center; margin-top:40px;">Корзина</h2>
+
+@{
+    decimal total = 0;
+    <body>
+        <table width="90%" align="center" style="margin-bottom: 50px;">
+            <thead>
+                <tr>
+                    <th align="center">Количество</th>
+                    <th align="left">Наименование</th>
+                    <th align="right">Цена</th>
+                    <th align="right">Итого</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var line in Model.Cart.Lines)
+                {
+                    <tr>
+                        <td align="center">@line.Quantity</td>
+                        <td align="left">@line.Good.Name</td>
+                        <td align="right">@line.Good.Price р.</td>
+                        <td align="right">@((line.Quantity * line.Good.Price)) р.</td>
+                        <td>
+                            @using (Html.BeginForm("RemoveFromCart", "Cart"))
+                            {
+                                @Html.Hidden("GoodId", line.Good.GoodId)
+                                @Html.HiddenFor(x => x.ReturnUrl)
+                                <input class="actionButtons" type="submit" value="Удалить" />
+                            }
+                        </td>
+                    </tr>
+                    total += line.Quantity * line.Good.Price;
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" align="right">Общая стоимость:</td>
+                    <td align="right">
+                        @Model.Cart.ComputeTotalValue() р.
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+        
+        <p align="center" class="actionButtons">
+            <a href="@Model.ReturnUrl">Продолжить покупки</a>
+            @Html.ActionLink("Заказать", "Checkout", new { total = total })
+        </p>
+    </body>
+}

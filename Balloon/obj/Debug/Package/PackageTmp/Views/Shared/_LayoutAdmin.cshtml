@@ -1,0 +1,19 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div style="width: 1000px; margin-left: auto; margin-right:auto;">
+        <a href="/Home/Index">На главную сайта</a> <br />
+        <a href="/Admin/Index">На главную админки</a>
+        @RenderBody()
+    </div>
+</body>
+</html>

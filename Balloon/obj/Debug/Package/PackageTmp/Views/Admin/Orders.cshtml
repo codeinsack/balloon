@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Balloon.Models.ApplicationUser>
+@using Balloon.Models
+
+@{
+    ViewBag.Title = "Orders";
+    Layout = null;
+}
+<h2 style="text-align: center;">Заказы</h2>
+
+<link href="~/Content/orders.css?v=@DateTime.Now.Millisecond" rel="stylesheet" />
+
+@foreach (var user in Model)
+{
+    <h2>@user.NickName</h2>
+    foreach (var order in user.Orders)
+    {
+        <hr />
+        <span>Заказ #@order.OrderId</span>
+        foreach (var itemOrder in ((Order)order).OrderItems)
+        {
+            <h4>@itemOrder.Good.Name (@itemOrder.Quantity шт.) @*<span style="font-style: italic;">Категория: @itemOrder.Good.Category.Name</span>*@</h4>
+        }
+        <p>Общая стоимость: @order.TotalSum р.</p>
+        <hr />
+    }
+}
+
+@*@{
+    <table width="90%" align="center" style="margin-bottom: 50px;">
+        <tr>
+            <th align="center">Пользователь</th>
+            <th align="left">Номер заказа</th>
+            <th align="right">Наименования</th>
+            <th align="right">Количество</th>
+            <th align="right">Категория</th>
+        </tr>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td align="center" rowspan="@TempData["Count"]">@user.NickName</td>
+                @foreach (var order in user.Orders)
+                {
+                    <td align="right" rowspan="@user.Orders.Count">#@order.OrderId</td>
+                    foreach (var itemOrder in ((Order)order).OrderItems)
+                    {
+                        <td align="right">@itemOrder.Good.Name</td>
+                        <td align="right">@itemOrder.Quantity шт.</td>
+                        <td align="right">@itemOrder.Good.Category.Name</td>
+                    }
+                }
+            </tr>
+        }
+    </table>
+}*@

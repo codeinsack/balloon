@@ -1,0 +1,11 @@
+﻿@model Balloon.Models.GoodListViewModel
+@{
+    ViewBag.Title = "List";
+}
+
+<div style="margin-bottom: 40px;"></div>
+
+@foreach (var item in Model.Goods)
+{
+    Html.RenderPartial("GoodSummary", item);
+}

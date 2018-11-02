@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Balloon.Models.Good>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<main>
+    <div class="slider">
+        <div class="slides fade">
+            <img src="~/Content/img/banner-confetti.jpg" width="1300" height="502">
+        </div>
+        <div class="slides fade">
+            <img src="~/Content/img/banner-fly.jpg" width="1300" height="502">
+        </div>
+        <div class="slides fade">
+            <img src="~/Content/img/banner-dog.jpg" width="1300" height="502">
+        </div>
+        <div class="slides fade">
+            <img src="~/Content/img/banner-love.jpg" width="1300" height="502">
+        </div>
+        <button class="btn-gallery-prev"><img src="~/Content/img/icon-arrow-left.png" width="45" height="42" onclick="plusSlides(-1)"></button>
+        <button class="btn-gallery-next"><img src="~/Content/img/icon-arrow-right.png" width="42" height="42" onclick="plusSlides(1)"></button>
+    </div>
+    <div class="clearfixbottom"></div>
+    <div class="section recommend"></div>
+    <div class="centerer clearfix">
+        @{Html.RenderAction("GoodPartial", "Good");}
+    </div>
+    <div class="section search-us"></div>
+    <div class="map">
+        <div id="yandex-map"></div>
+    </div>
+    <div class="section review"></div>
+    <div class="centerer clearfix">
+        @{Html.RenderAction("ArticlePartial", "Article");}
+    </div>
+    <div class="button-readall">
+        @Html.ActionLink("Читать все", "Index", "Article")
+    </div>
+</main>

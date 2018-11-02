@@ -1,0 +1,47 @@
+﻿@model Balloon.Models.SmallButtonModel
+@using Balloon.Models;
+
+<td style="width:120px;">
+    <div class="btn-group" role="group">
+        @Html.Partial("_SmallButtonPartial",
+        new SmallButtonModel
+        {
+            Action = "Edit",
+            ButtonType = "btn-primary",
+            Glyph = "pencil",
+            Text = "Edit button",
+            Id = Model.Id,
+            ArticleId = Model.ArticleId,
+            OrderId = Model.OrderId,
+            UserId = Model.UserId
+        })
+        @if (Model.UserId == null || Model.UserId.Equals(string.Empty))
+        {
+            @Html.Partial("_SmallButtonPartial",
+                 new SmallButtonModel
+                 {
+                     Action = "Details",
+                     ButtonType = "btn-success",
+                     Glyph = "list",
+                     Text = "Detail button",
+                     Id = Model.Id,
+                     ArticleId = Model.ArticleId,
+                     OrderId = Model.OrderId,
+                     UserId = Model.UserId
+                 })
+        }
+
+        @Html.Partial("_SmallButtonPartial",
+        new SmallButtonModel
+        {
+            Action = "Delete",
+            ButtonType = "btn-danger",
+            Glyph = "trash",
+            Text = "Delete button",
+            Id = Model.Id,
+            ArticleId = Model.ArticleId,
+            OrderId = Model.OrderId,
+            UserId = Model.UserId
+        })
+    </div>
+</td>

@@ -1,0 +1,123 @@
+﻿@model Balloon.Models.CartIndexViewModel
+
+@using Balloon.Models
+
+@{
+    ViewBag.Title = "Sports Store: Your Cart";
+}
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
+<link href="~/Content/cart.css?v=@DateTime.Now.Millisecond" rel="stylesheet" />
+<script src="~/Scripts/moment.js"></script>
+<script src="~/Scripts/bootstrap-datetimepicker.js"></script>
+<link href="~/Content/bootstrap-datetimepicker.css" rel="stylesheet" />
+
+<h2 style="text-align:center; margin-top:40px;">Корзина</h2>
+
+@{
+    decimal total = 0;
+<body>
+    @using (Html.BeginForm("ClearCart", "Cart"))
+    {
+        <input style="margin-left: 1050px; margin-bottom: 20px;" class="actionButtons" type="submit" value="Очистить корзину" class="sub" />
+    }
+    @using (Html.BeginForm("Update", "Cart"))
+    {
+        <table width="90%" align="center" style="margin-bottom: 50px;">
+            <thead>
+                <tr>
+                    <th align="center">Количество <input class="actionButtons" type="submit" value="Обновить" /> </th>
+                    <th align="left">Наименование</th>
+                    <th align="right">Цена</th>
+                    <th align="right">Итого</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var line in Model.Cart.Lines)
+                {
+                    <tr>
+                        <td align="center"><input type="text" name="quantity" value="@line.Quantity" />  </td>
+                        <td align="left">@line.Good.Name</td>
+                        <td align="right">@line.Good.Price р.</td>
+                        <td align="right">@((line.Quantity * line.Good.Price)) р.</td>
+                        <td>
+                            @using (Html.BeginForm("RemoveFromCart", "Cart"))
+                            {
+                                @Html.Hidden("GoodId", line.Good.GoodId)
+                                @Html.HiddenFor(x => x.ReturnUrl)
+                                <input class="actionButtons" type="submit" value="Удалить" />
+                            }
+                        </td>
+                    </tr>
+                    total += line.Quantity * line.Good.Price;
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" align="right">Общая стоимость:</td>
+                    <td align="right">
+                        @Model.Cart.ComputeTotalValue() р.
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    }
+
+
+    @using (Html.BeginForm("Checkout", "Cart", FormMethod.Post))
+    {
+        <div class="wrapper" style="margin-left:700px; margin-bottom:50px;">
+            <label>Понадобится ли доставка?</label>
+            <input name="delivery" type="checkbox" value="true" />
+            <div class="hide-delivery">
+                <label>Дата доставки:</label>
+                @Html.TextBox("deliveryDate", null, new { @class = "form-control datepicker" }) <br />
+                @if (TempData["Date"] != null)
+                {
+                    <div style="color:red;">@TempData["Date"]</div>
+                }
+                <label>Адрес доставки:</label>
+                <input type="text" name="deliveryAddress" />
+                @if (TempData["Address"] != null)
+    {
+            <div style="color:red;">@TempData["Address"]</div>
+}
+            </div>
+        </div>
+
+        @*<style>
+                .hide-delivery {
+                    display: none;
+                }
+
+                input:checked + .hide-delivery {
+                    display: block;
+                }
+            </style>*@
+
+        <p align="center" class="actionButtons">
+            <a href="@Model.ReturnUrl">Продолжить покупки</a>
+            @Html.Hidden("total", total)
+            <input class="actionButtons" type="submit" value="Заказать" class="sub" />
+        </p>
+    }
+   
+</body>
+}
+
+<script type="text/javascript">
+    var currentDate = new Date();
+    currentDate.toString();
+
+    $(function () {
+        $('.datepicker').datetimepicker({
+            format: "MM/DD/YYYY"
+        }).on('dp.change', function (e) {
+            $(this).data('DateTimePicker').hide();
+            });
+    });
+
+</script>
+

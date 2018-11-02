@@ -1,0 +1,142 @@
+﻿@model IEnumerable<Balloon.Models.Order>
+
+@using Balloon.Models
+
+<script src="~/Scripts/moment.js"></script>
+<script src="~/Scripts/bootstrap-datetimepicker.js"></script>
+<link href="~/Content/bootstrap-datetimepicker.css" rel="stylesheet" />
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Управление заказами</h2>
+
+<h4>Показать заказы</h4>
+
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        <div class="form-group form-group-sm">
+            <div class="col-md-8">
+                с @Html.TextBox("start", (string)ViewBag.Start, new { @class = "form-control datepicker", @id = "startDate" })
+            </div>
+        </div>
+        <div class="form-group form-group-sm">
+            <div class="col-md-8">
+                по @Html.TextBox("end", (string)ViewBag.End, new { @class = "form-control datepicker", @id = "endDate" })
+            </div>
+        </div>
+        <div class="form-group-sm">
+            <div style="margin-bottom:15px;">
+                <input type="submit" value="Показать" class="btn btn-success" id="showOrders" /> <span> </span>
+            </div>
+        </div>
+    </div>
+}
+
+<table class="table table-striped table-condensed">
+    <tr class="success">
+        <th>
+            @Html.DisplayName("Номер заказа")
+        </th>
+        <th>
+            @Html.DisplayName("Имя заказчика")
+        </th>
+        <th>
+            @Html.DisplayName("Почтовый ящик")
+        </th>
+        <th>
+            @Html.DisplayName("Дата заказа")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalSum)
+        </th>
+        <th>
+            @Html.DisplayName("Дата доставки")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DeliveryAddress)
+        </th>
+        <th>
+            @Html.DisplayName("Подтверждение заказа")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            #@Html.DisplayFor(modelItem => item.OrderId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.NickName)
+        </td>
+        <th>
+            @Html.DisplayFor(model => item.User.Email)
+        </th>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalSum) р.
+        </td>
+        <td>
+            @{
+            if (item.Delivery == null || item.Delivery == false)
+            {
+                <span>самовывоз</span>
+        }
+        else
+        {
+            @Html.DisplayFor(modelItem => item.DeliveryDate)
+    }
+            }
+        </td>
+        <td>
+            @{
+            if (item.Delivery == null || item.Delivery == false)
+            {
+                <span>самовывоз</span>
+        }
+        else
+        {
+            @Html.DisplayFor(modelItem => item.DeliveryAddress)
+        }
+            }
+        </td>
+        <td>
+            @*@Html.DisplayFor(modelItem => item.Confirmation)*@
+            @if (item.Confirmation == false)
+            {
+                using (Html.BeginForm("Confirmation", "OrderAdmin"))
+                {
+                    @Html.Hidden("OrderId", item.OrderId)
+                    @*@Html.HiddenFor(x => x.ReturnUrl)*@
+                    <input class="btn btn-info" type="submit" value="Подтвердить" />
+                }
+            }
+            else
+            {
+                <p>подтверждено!</p>
+            }
+        </td>
+        @Html.Partial("_TableButtonsPartial", new SmallButtonModel { Id = item.OrderId })
+
+        
+    </tr>
+}
+</table>
+
+<script type="text/javascript">
+    var currentDate = new Date();
+    currentDate.toString();
+
+    $(function () {
+        $('.datepicker').datetimepicker({
+            format: "MM/DD/YYYY"
+        }).on('dp.change', function (e) {
+            $(this).data('DateTimePicker').hide();
+            });
+    });
+</script>

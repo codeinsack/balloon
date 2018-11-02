@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Balloon.Models.Order>
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div style="width: 600px;">
+    <h2>Подробная информация по заказу</h2>
+
+    <div>
+        <hr />
+        <table class="table table-condensed table-striped">
+            <tr class="success">
+                <th>Наименование</th>
+                <th>Цена</th>
+                <th>Количество</th>
+                <th>Изображение</th>
+                <th></th>
+            </tr>
+            @foreach (var order in Model)
+            {
+                foreach (var orderItems in order.OrderItems)
+                {
+                    <tr>
+                        <td>@orderItems.Good.Name</td>
+                        <td>@orderItems.Good.Price р.</td>
+                        <td>@orderItems.Quantity шт.</td>
+                        <td>
+                            <img width="70" src="@Url.Action("GetImage", "Good", new { orderItems.GoodId })" />
+                        </td>
+                    </tr>
+                }
+
+            }
+        </table>
+        @*<dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.User.FirstName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.User.FirstName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Date)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Date)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.TotalSum)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.TotalSum)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Delivery)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Delivery)
+                </dd>
+
+            </dl>*@
+    </div>
+    <p>
+        @Html.Partial("_BackToListButtonPartial")
+    </p>
+</div>

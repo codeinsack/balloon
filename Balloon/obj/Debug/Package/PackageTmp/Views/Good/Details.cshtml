@@ -1,0 +1,28 @@
+﻿@model Balloon.Models.Good
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div style="margin-left:200px;">
+    <h2 style="text-transform: initial">@Model.Name</h2>
+    <p>
+        <img style="box-shadow: 2px 4px 10px 1px #b4b2b2;" width="400" height="400" src="@Url.Action("GetImage", "Good", new { Model.GoodId })" />
+    </p>
+    <p>
+        <strong style="text-transform: initial">Наименование:</strong>
+        <span style="text-transform: initial; margin-left: 7px;">@Model.Name</span>
+    </p>
+    <p>
+        <strong style="text-transform: initial">Цена:</strong>
+        <span style="margin-left: 7px;">@Model.Price р.</span>
+    </p>
+    <div class="btn-cart">
+        @using (Html.BeginForm("AddToCart", "Cart"))
+            {
+            @Html.HiddenFor(x => x.GoodId)
+            @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+            <input type="submit" value="" />
+        }
+    </div>
+</div>

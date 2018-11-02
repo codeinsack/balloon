@@ -1,0 +1,9 @@
+﻿@{
+    Layout = null;
+}
+
+@using (Html.BeginForm("Search", "Good", FormMethod.Get, new { enctype = "multipart/form-data" }))
+{
+    <input class="search-input" type="text" name="searching" placeholder="Поиск">
+    <input class="search-btn" type="submit" value="">
+}

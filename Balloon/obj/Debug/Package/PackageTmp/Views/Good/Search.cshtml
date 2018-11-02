@@ -1,0 +1,12 @@
+﻿@model IEnumerable<Balloon.Models.Good>
+
+@{
+    ViewBag.Title = "Search";
+}
+
+<div style="margin-bottom: 40px;"></div>
+
+@foreach (var item in Model)
+{
+    Html.RenderPartial("GoodSummary", item);
+}

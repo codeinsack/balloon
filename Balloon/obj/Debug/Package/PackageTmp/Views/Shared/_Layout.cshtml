@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Cormorant+SC" rel="stylesheet">
+    <link href="~/Content/style.css?v=@DateTime.Now.Millisecond" rel="stylesheet" />
+    <link href="~/Content/normalize.css" rel="stylesheet" />
+    <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A39cc4fad4ba723e3f3e0ba6bf53a47a67c0ad29e29ba244f2456dbbc0f09da17&amp;width=958&amp;height=489&amp;lang=ru_RU&amp;scroll=true&id=yandex-map"></script>
+</head>
+<body>
+    <div class="main-centerer">
+
+        <header class="main-header">
+            <div class="first-block">
+                <div class="first-centerer">
+                    <nav class="main-navigation">
+                        <ul>
+                            <li>
+                                <a href="#">О нас</a>
+                            </li>
+                            <li>
+                                <a href="#">Доставка и оплата</a>
+                            </li>
+                            <li>
+                                <a href="#">Контакты</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="search">
+                        @Html.Partial("SearchPartial")
+                    </div>
+                    <div class="log-in">
+                        @Html.Partial("LoginPartial")
+                    </div>
+                </div>
+            </div>
+            <div class="second-block">
+                <div class="second-centerer">
+                    <div class="dummy-logo"></div>
+                    <div class="header-logo">
+                        <a href="@Url.Action("Index", "Home")"><img src="~/Content/img/index-logo.png" /></a>
+                    </div>
+                    <div class="header-info">
+                        <div class="header-border">
+                            <p>Доставка круглосуточно!</p>
+                            <p>Прием заказов с 9:00 до 21:00</p>
+                        </div>
+                    </div>
+                    <div class="phone">
+                        <p>8(044)770-37-04</p>
+                        <p>8(029)851-26-33</p>
+                    </div>
+                    <div class="cart">
+                        @{Html.RenderAction("Summary", "Cart");}
+                    </div>
+                </div>
+            </div>
+            @{ Html.RenderAction("Menu", "Nav"); }
+        </header>
+
+        <main>
+            @RenderBody()
+            <div class="clearfixbottom"></div>
+        </main>
+
+        <footer>
+            <div class="footer-container">
+                <div class="footer-centerer">
+                    <div class="footer-about">
+                        <p>Boo Boo Balloons</p>
+                        <p>Адрес: ул. Логойский тракт 15-2-2</p>
+                        <p>Телефон: 8(044)770-37-04</p>
+                    </div>
+                    <div class="footer-social">
+                        <p>Давайте дружить!</p>
+                        <a class="social-btn social-btn-vk" href="#">Вконтакте</a>
+                        <a class="social-btn social-btn-fb" href="#">Фейсбук</a>
+                        <a class="social-btn social-btn-inst" href="#">Инстаграм</a>
+                    </div>
+                    <div class="footer-develop">
+                        <p>Разработано</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <script src="~/Content/script.js"></script>
+    @RenderSection("Scripts", false)
+</body>
+</html>

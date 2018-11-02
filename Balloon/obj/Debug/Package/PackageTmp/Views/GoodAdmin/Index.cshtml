@@ -1,0 +1,66 @@
+﻿@model Balloon.Models.GoodsListViewModel
+
+@{ 
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using Balloon.Models
+
+@{
+    ViewBag.Title = "Управление товарами";
+}
+
+<h2>Управление товарами</h2>
+
+<p>
+    @Html.Partial("_CreateButtonPartial")
+</p>
+
+<form method="get">
+    <div style="">
+        <div style="margin-bottom:15px; width:200px; display:inline-block;">
+            <label class="control-label" style="font-size:16px;">Категория: </label>
+            @Html.DropDownList("category", Model.Categories as SelectList, htmlAttributes: new { @class = "form-control" })
+        </div>
+        <input type="submit" value="Показать" class="btn btn-success" style="margin-bottom: 5px; margin-left: 15px;" />
+    </div>
+</form>
+
+<table class="table">
+    <tr class="success">
+        <th>
+            @Html.DisplayName("Наименование")
+        </th>
+        <th>
+            @Html.DisplayName("Цена")
+        </th>
+        <th>
+            @Html.DisplayName("Изображение")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.Goods)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price) р.
+        </td>
+        <td>
+           @if (item.ImageData == null)
+           {
+            @:Нет изображения
+            }
+           else
+           {
+            <img width="70" src="@Url.Action("GetImage", "Good", new { item.GoodId })" />
+           }
+        </td>
+        @Html.Partial("_TableButtonsPartial", new SmallButtonModel { Id = item.GoodId })
+    </tr>
+}
+
+</table>

@@ -1,0 +1,37 @@
+﻿h2 {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.center {
+    margin-left: 550px;
+    margin-top: 40px;
+}
+
+.btn-sub {
+    font-family: 'Cormorant SC', serif;
+    color: white;
+    text-decoration: none;
+    padding: .15em 1.5em .2em 1.5em;
+    background-color: #353535;
+    border: 1px solid black;
+    cursor: pointer;
+    outline: none;
+    opacity: 0.9;
+}
+
+.btn-sub.reg {
+    margin: 0;
+    margin-top: 20px;
+}
+
+.btn-sub:hover {
+    opacity: 1;
+}
+
+
+input[type=text], input[type=password], textarea {
+    font-family: 'Cormorant SC', serif;
+    outline-color: #4edbd6;
+    text-transform: initial;
+}

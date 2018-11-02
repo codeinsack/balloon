@@ -1,0 +1,53 @@
+﻿@model Balloon.Models.RegisterModel
+
+@{
+    ViewBag.Title = "Register";
+}
+
+<link href="~/Content/login.css?v=@DateTime.Now.Millisecond" rel="stylesheet" />
+
+<h2>Регистрация</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="center" style="text-transform: initial;">
+        @Html.ValidationSummary(false)
+
+        <div>
+            Электронный адрес
+            <div>
+                @Html.EditorFor(model => model.Email)
+            </div>
+        </div>
+
+        <div>
+            Прозвище
+            <div>
+                @Html.EditorFor(model => model.NickName)
+            </div>
+        </div>
+
+        <div>
+            Пароль
+            <div>
+                @Html.EditorFor(model => model.Password)
+            </div>
+        </div>
+
+        <div>
+            Подтвердить пароль
+            <div>
+                @Html.EditorFor(model => model.PasswordConfirm)
+            </div>
+        </div>
+
+        <div>
+            <div>
+                <input class="btn-sub reg" type="submit" value="Зарегистрировать" />
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,99 @@
+﻿.centerer {
+    width: 1300px;
+    height: auto;
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.link {
+    position: relative;
+
+    float: left;
+    width: 600px;
+    height: 250px;
+    margin: 5px;
+    box-shadow: 3px 5px 10px 2px #9e9c9c;
+}
+
+.link:hover {
+    z-index: 400;
+}
+
+.link a:hover {
+    color: white;
+}
+
+.link a {
+    display: block;
+    margin-top: 20px;    
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
+    font-family: 'Cormorant SC', serif;
+    font-weight: bold;
+    font-size: 27px;
+    text-transform: uppercase;
+    text-align: center;
+    color: black;
+}
+
+.link.edit-goods {
+    background: url("img/icon-admin-edit.png") 260px 125px no-repeat;
+    background-size: 55px;
+}
+
+.link.edit-goods:hover {
+    background: gray url("img/icon-admin-edit-w.png") 260px 125px no-repeat;
+    background-size: 55px;
+}
+
+.link.browse-orders {
+    background: url("img/icon-admin-browse-orders.png") 260px 125px no-repeat;
+    background-size: 55px;
+}
+
+.link.browse-orders:hover {
+    background: gray url("img/icon-admin-browse-orders-w.png") 260px 125px no-repeat;
+    background-size: 55px;
+}
+
+.link.browse-roles {
+    background: url("img/icon-admin-browse-roles.png") 260px 125px no-repeat;
+    background-size: 55px;
+}
+
+.link.browse-roles:hover {
+    background: gray url("img/icon-admin-browse-roles-w.png") 260px 125px no-repeat;
+    background-size: 55px;
+}
+
+.link.edit-profile {
+    background: url("img/icon-admin-edit-profile.png") 260px 125px no-repeat;
+    background-size: 55px;
+}
+
+.link.edit-profile:hover {
+    background: gray url("img/icon-admin-edit-profile-w.png") 260px 125px no-repeat;
+    background-size: 55px;
+}
+
+.link.delete-account {
+    background: url("img/icon-admin-delete.png") 260px 125px no-repeat;
+    background-size: 55px;
+}
+
+.link.delete-account:hover {
+    background: gray url("img/icon-admin-delete-w.png") 260px 125px no-repeat;
+    background-size: 55px;
+}
+
+.link.return {
+    background: url("img/icon-admin-return.png") 260px 125px no-repeat;
+    background-size: 55px;
+}
+
+.link.return:hover {
+    background: gray url("img/icon-admin-return-w.png") 260px 125px no-repeat;
+    background-size: 55px;
+}

@@ -1,0 +1,28 @@
+﻿@model Balloon.Models.LoginModel
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<link href="~/Content/login.css?v=@DateTime.Now.Millisecond" rel="stylesheet" />
+
+<h2>Вход на сайт</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="center">
+        @Html.ValidationSummary()
+        <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
+        <p>
+            <label style="text-transform: initial">Email</label><br />
+            @Html.EditorFor(x => x.Email)
+        </p>
+        <p>
+            <label style="text-transform: initial">Пароль</label><br />
+            @Html.EditorFor(x => x.Password)
+        </p>
+        <p><button class="btn-sub" type="submit">Войти</button></p>
+    </div>
+}

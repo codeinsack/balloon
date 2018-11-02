@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Balloon.Models.Article>
+
+@{
+    Layout = null;
+}
+
+@foreach (var item in Model)
+{
+    <div class="review-item">
+        <p class="review-item-name">@item.User.NickName</p>
+        <p class="review-item-date">@item.Date</p>
+        <p class="review-item-title">@item.Title</p>
+        <p class="review-item-text">@item.Content</p>
+    </div>
+}

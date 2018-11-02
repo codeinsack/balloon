@@ -1,0 +1,8 @@
+﻿@model Balloon.Models.Cart
+
+
+<p>@Model.ComputeTotalValue() р.</p>
+
+<div class="cart-main">
+    <a href="@Url.Action("Index", "Cart", new { returnUrl = Request.Url.PathAndQuery })"><img src="~/Content/img/icon-cart.png" /></a>
+</div>

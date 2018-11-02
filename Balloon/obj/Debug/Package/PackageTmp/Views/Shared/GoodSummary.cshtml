@@ -1,0 +1,20 @@
+﻿@model Balloon.Models.Good
+
+<div class="centerer">
+    <div class="products-item">
+        <a class="product-view" href="@Url.Action("Details", new { id = Model.GoodId })">
+            <img width="254" height="254" src="@Url.Action("GetImage", "Good", new { Model.GoodId })" />
+            <img class="eye" src="~/Content/img/icon-view.png" width="38" height="19">
+        </a>
+        <p class="product-title">@Model.Name</p>
+        <p class="product-price">@Model.Price р.</p>
+        <div class="btn-cart">
+            @using (Html.BeginForm("AddToCart", "Cart"))
+            {
+                @Html.HiddenFor(x => x.GoodId)
+                @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+                <input type="submit" value="" />
+            }
+        </div>
+    </div>
+</div>

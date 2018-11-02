@@ -1,0 +1,26 @@
+﻿@using Balloon.Extensions
+
+
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+        <span class="up-log email-log">
+            @Html.ActionLink("Привет, " + User.Identity.GetUserFirstName() + "!", "Index", "Admin", routeValues: new { area = "" },
+                htmlAttributes: new { title = "" })
+        </span>
+        <span class="down-log">
+            <a href="javascript:document.getElementById('logoutForm').submit()">Выйти</a>
+        </span>
+    }
+}
+else
+{
+    <span class="up-log">
+        @Html.ActionLink("Регистрация", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
+    </span>
+    <span class="down-log">
+        @Html.ActionLink("Войти", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+    </span>
+}

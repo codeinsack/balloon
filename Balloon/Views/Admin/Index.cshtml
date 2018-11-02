@@ -1,0 +1,39 @@
+﻿@{ 
+    Layout = null;
+}
+
+<link href="~/Content/admin-index.css?v=@DateTime.Now.Millisecond" rel="stylesheet" />
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+
+<div class="centerer">
+    @if (User.IsInRole("Администратор"))
+    {
+        <div class="link edit-goods">@Html.ActionLink("Управление товарами", "Index", "GoodAdmin")</div>
+        <div class="link browse-orders">@Html.ActionLink("Управлением заказами", "Index", "OrderAdmin")</div>
+        <div class="link browse-roles">@Html.ActionLink("Управление отзывами", "Index", "ArticleAdmin")</div>
+        <div class="link browse-roles">@Html.ActionLink("Управление пользователями", "Index", "Account")</div>
+        <div class="link browse-roles">@Html.ActionLink("Статистика просмотров и продаж товаров", "Index", "Statistics")</div>
+        <div class="link browse-roles">@Html.ActionLink("Вернуться на сайт", "Index", "Home")</div>
+    }
+    else if (User.IsInRole("Модератор"))
+    {
+        <div class="link edit-goods">@Html.ActionLink("Управление товарами", "Index", "GoodAdmin")</div>
+        <div class="link browse-orders">@Html.ActionLink("Управлением заказами", "Index", "OrderAdmin")</div>
+        <div class="link browse-roles">@Html.ActionLink("Управление комментариями", "Index", "ArticleAdmin")</div>
+        <div class="link browse-roles">@Html.ActionLink("Вернуться на сайт", "Index", "Home")</div>
+    }
+
+    @*<div id="ajax" class="link browse-roles">@Html.ActionLink("Ajax", "Ajax", "Home")</div>*@
+</div>
+
+@*<script>
+    $(function () {
+        $('#ajax').click(function () {
+            $.post('/Home/Ajax', {}).then(function (data) {
+                alert(data);
+            });
+            return false;
+        });
+    });
+</script>*@

@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Balloon.Models.Article>
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<link href="~/Content/login.css" rel="stylesheet" />
+
+<h3 style="text-align:center;">Все комментарии</h3>
+
+@foreach (var item in Model)
+{
+    <div style="background-color:silver; padding:3px; margin:5px;">
+        <p style="font-style:italic;">@item.Date</p>
+        <h3>@item.Title</h3>
+        <p>@item.Content</p>
+        <p>Добавил(а) <b>@item.User.NickName</b></p>
+    </div>
+}
+
+@using (Html.BeginForm("Create", "Article", FormMethod.Post))
+{
+    @Html.Hidden("UserId", User.Identity.GetUserId())
+    @Html.Hidden("Date", DateTime.Now)
+    <fieldset style="margin-top:20px; line-height: 20px; text-transform:initial;">
+        <legend>Добавить запись</legend>
+        Введите заголовок: <br /> <input type="text" name="Title" maxlength="50" />
+        @if (TempData["Title"] != null)
+        {
+            <div style="color:red;">@TempData["Title"]</div>
+        }
+        <br />
+        Введите сообщение: <br />
+        <textarea name="Content" rows="5" cols="40"></textarea>
+        @if (TempData["Content"] != null)
+        {
+            <div style="color:red;">@TempData["Content"]</div>
+        }
+        <br />
+        <input style="margin-top:10px;" class="btn-sub" type="submit" value="Отправить" />
+    </fieldset>
+}
